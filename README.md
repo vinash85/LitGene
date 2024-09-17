@@ -1,6 +1,8 @@
-This work is on trail webrun with deployement on (https://www.avisahuai.com/tools) Select LitGene tool 
-and Deployment github (https://github.com/vinash85/GENELLM_WEBAPP). 
-Use feedback page or contact authors to provide feedback
+This work is on trail webrun with deployement on (https://www.avisahuai.com/tools) select LitGene tool. 
+Deployment github (https://github.com/vinash85/GENELLM_WEBAPP) can be used for self deployment of the webpage. 
+Use feedback page on the LitGene tool page or contact authors to provide feedback.
+BioArxiv link: https://www.biorxiv.org/content/10.1101/2024.08.07.606674v1
+
 Here is how to run sample code using Docker.
 1. Build docker:
       a. Go to location of docker file after git clone "cd LitGene/dependencies/docker/"
