@@ -1,6 +1,6 @@
 # LitGene CodeBase
 
-This work is on trail webrun with deployement on (https://www.avisahuai.com/tools) select LitGene tool. 
+This work is on trail webrun with deployement on (https://litgene.tumorai.org/)). 
 
 Deployment github (https://github.com/vinash85/GENELLM_WEBAPP) can be used for self deployment of the webpage. 
 
