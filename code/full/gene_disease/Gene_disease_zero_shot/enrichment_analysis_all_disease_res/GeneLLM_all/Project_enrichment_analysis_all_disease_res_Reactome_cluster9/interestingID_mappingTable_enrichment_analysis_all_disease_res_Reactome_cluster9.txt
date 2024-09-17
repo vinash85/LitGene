@@ -1,0 +1,25 @@
+userId	geneSymbol	geneName	entrezgene	gLink
+FAM13A	FAM13A	family with sequence similarity 13 member A	10144	https://www.ncbi.nlm.nih.gov/gene/?term=10144
+FOXJ1	FOXJ1	forkhead box J1	2302	https://www.ncbi.nlm.nih.gov/gene/?term=2302
+CCDC59	CCDC59	coiled-coil domain containing 59	29080	https://www.ncbi.nlm.nih.gov/gene/?term=29080
+GATA3	GATA3	GATA binding protein 3	2625	https://www.ncbi.nlm.nih.gov/gene/?term=2625
+FNDC3B	FNDC3B	fibronectin type III domain containing 3B	64778	https://www.ncbi.nlm.nih.gov/gene/?term=64778
+FRMD3	FRMD3	FERM domain containing 3	257019	https://www.ncbi.nlm.nih.gov/gene/?term=257019
+HOXB5	HOXB5	homeobox B5	3215	https://www.ncbi.nlm.nih.gov/gene/?term=3215
+PHF14	PHF14	PHD finger protein 14	9678	https://www.ncbi.nlm.nih.gov/gene/?term=9678
+NR4A3	NR4A3	nuclear receptor subfamily 4 group A member 3	8013	https://www.ncbi.nlm.nih.gov/gene/?term=8013
+FOXP1	FOXP1	forkhead box P1	27086	https://www.ncbi.nlm.nih.gov/gene/?term=27086
+GATA6	GATA6	GATA binding protein 6	2627	https://www.ncbi.nlm.nih.gov/gene/?term=2627
+GFI1	GFI1	growth factor independent 1 transcriptional repressor	2672	https://www.ncbi.nlm.nih.gov/gene/?term=2672
+NFATC2IP	NFATC2IP	nuclear factor of activated T cells 2 interacting protein	84901	https://www.ncbi.nlm.nih.gov/gene/?term=84901
+ZNF793	ZNF793	NA	390927	https://www.ncbi.nlm.nih.gov/gene/?term=390927
+FOXF1	FOXF1	forkhead box F1	2294	https://www.ncbi.nlm.nih.gov/gene/?term=2294
+NKIRAS1	NKIRAS1	NFKB inhibitor interacting Ras like 1	28512	https://www.ncbi.nlm.nih.gov/gene/?term=28512
+EPSTI1	EPSTI1	epithelial stromal interaction 1	94240	https://www.ncbi.nlm.nih.gov/gene/?term=94240
+CTHRC1	CTHRC1	collagen triple helix repeat containing 1	115908	https://www.ncbi.nlm.nih.gov/gene/?term=115908
+TBX3	TBX3	T-box 3	6926	https://www.ncbi.nlm.nih.gov/gene/?term=6926
+ELF3	ELF3	E74 like ETS transcription factor 3	1999	https://www.ncbi.nlm.nih.gov/gene/?term=1999
+NKX3-2	NKX3-2	NK3 homeobox 2	579	https://www.ncbi.nlm.nih.gov/gene/?term=579
+ATXN1L	ATXN1L	ataxin 1 like	342371	https://www.ncbi.nlm.nih.gov/gene/?term=342371
+CDKN2B	CDKN2B	cyclin dependent kinase inhibitor 2B	1030	https://www.ncbi.nlm.nih.gov/gene/?term=1030
+THBS1	THBS1	thrombospondin 1	7057	https://www.ncbi.nlm.nih.gov/gene/?term=7057

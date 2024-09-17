@@ -1,0 +1,25 @@
+userId	geneSymbol	geneName	entrezgene	gLink
+LEP	LEP	leptin	3952	https://www.ncbi.nlm.nih.gov/gene/?term=3952
+THRSP	THRSP	thyroid hormone responsive	7069	https://www.ncbi.nlm.nih.gov/gene/?term=7069
+METRNL	METRNL	meteorin like, glial cell differentiation regulator	284207	https://www.ncbi.nlm.nih.gov/gene/?term=284207
+CCDC71L	CCDC71L	coiled-coil domain containing 71 like	168455	https://www.ncbi.nlm.nih.gov/gene/?term=168455
+ADIPOR2	ADIPOR2	adiponectin receptor 2	79602	https://www.ncbi.nlm.nih.gov/gene/?term=79602
+ADIPOR1	ADIPOR1	adiponectin receptor 1	51094	https://www.ncbi.nlm.nih.gov/gene/?term=51094
+PLIN2	PLIN2	perilipin 2	123	https://www.ncbi.nlm.nih.gov/gene/?term=123
+BSCL2	BSCL2	BSCL2, seipin lipid droplet biogenesis associated	26580	https://www.ncbi.nlm.nih.gov/gene/?term=26580
+C1QTNF2	C1QTNF2	C1q and TNF related 2	114898	https://www.ncbi.nlm.nih.gov/gene/?term=114898
+PNLIP	PNLIP	pancreatic lipase	5406	https://www.ncbi.nlm.nih.gov/gene/?term=5406
+CAVIN1	CAVIN1	caveolae associated protein 1	284119	https://www.ncbi.nlm.nih.gov/gene/?term=284119
+ANGPTL8	ANGPTL8	angiopoietin like 8	55908	https://www.ncbi.nlm.nih.gov/gene/?term=55908
+LPIN2	LPIN2	lipin 2	9663	https://www.ncbi.nlm.nih.gov/gene/?term=9663
+C1QTNF9B	C1QTNF9B	C1q and TNF related 9B	387911	https://www.ncbi.nlm.nih.gov/gene/?term=387911
+ANGPTL4	ANGPTL4	angiopoietin like 4	51129	https://www.ncbi.nlm.nih.gov/gene/?term=51129
+PLIN5	PLIN5	perilipin 5	440503	https://www.ncbi.nlm.nih.gov/gene/?term=440503
+SERPINA12	SERPINA12	serpin family A member 12	145264	https://www.ncbi.nlm.nih.gov/gene/?term=145264
+SCD5	SCD5	stearoyl-CoA desaturase 5	79966	https://www.ncbi.nlm.nih.gov/gene/?term=79966
+ADIPOQ	ADIPOQ	adiponectin, C1Q and collagen domain containing	9370	https://www.ncbi.nlm.nih.gov/gene/?term=9370
+ERFE	ERFE	erythroferrone	151176	https://www.ncbi.nlm.nih.gov/gene/?term=151176
+PM20D1	PM20D1	peptidase M20 domain containing 1	148811	https://www.ncbi.nlm.nih.gov/gene/?term=148811
+LRP3	LRP3	LDL receptor related protein 3	4037	https://www.ncbi.nlm.nih.gov/gene/?term=4037
+FFAR4	FFAR4	free fatty acid receptor 4	338557	https://www.ncbi.nlm.nih.gov/gene/?term=338557
+CD36	CD36	CD36 molecule	948	https://www.ncbi.nlm.nih.gov/gene/?term=948

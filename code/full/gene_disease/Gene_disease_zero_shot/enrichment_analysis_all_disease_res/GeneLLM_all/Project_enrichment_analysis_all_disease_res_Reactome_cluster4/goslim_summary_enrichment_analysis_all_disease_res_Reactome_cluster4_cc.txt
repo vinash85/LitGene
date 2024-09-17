@@ -1,0 +1,10 @@
+GO:0005634	nucleus	34
+GO:0031974	membrane-enclosed lumen	27
+GO:0032991	protein-containing complex	18
+GO:0005829	cytosol	13
+GO:0005694	chromosome	6
+GO:0005739	mitochondrion	5
+GO:0042995	cell projection	3
+GO:0016020	membrane	3
+GO:0005840	ribosome	1
+GO:0005615	extracellular space	1

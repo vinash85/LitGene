@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>WebGestalt (WEB-based GEne SeT AnaLysis Toolkit)</title>
+<link rel="icon" type="image/png" href="https://s3-us-west-2.amazonaws.com/webgestalt/favicon.png">
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-42098540-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=es2015%2Ces2016%2Cfetch"></script>
+<script src="https://www.webgestalt.org//assets/0.4/build/vendor.min.js"></script>
+	<script>window.cytoscape = null;</script>
+	<link rel="stylesheet" href="https://www.webgestalt.org//assets/0.4/build/vendor.css">
+	<link rel="stylesheet" href="https://www.webgestalt.org//assets/0.4/build/wg.css">
+<link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css">
+</head>
+<body>
+<header>
+	<div id="header-img"><a href="https://www.webgestalt.org/"><img border="0" src="https://www.webgestalt.org//images/gsa.png"></a></div>
+	<div id="header-title">
+		<p id="header-title-text">WEB-based GEne SeT AnaLysis Toolkit</p>
+		<p id="header-subtitle-text">Translating gene lists into biological insights...</p>
+	</div>
+</header>
+<hr><main>
+<div id="app">
+<div class="loading-preinit" v-cloak><div class="loading-icon"></div></div>
+<div class="wrapper" v-cloak>
+<div class="level">
+	<div class="level-left">
+		<div class="level-item">
+			<h4 class="title is-4 has-text-primary">Summary</h4>
+		</div>
+	</div>
+	<div class="level-right">
+		<div class="level-item">
+			<a class="button is-text" href="Project_enrichment_analysis_all_disease_res_Reactome_cluster2.zip" target="_blank">Result Download</a>
+		</div>
+	</div>
+</div>
+
+<section id="summary" class="summary">
+<div class="card" v-bind:class="{active: summaryShown}" >
+	<div class="card-header" v-on:click="summaryShown=!summaryShown">
+		<p class="card-header-title">Job summary</p>
+		<a href="#" class="card-header-icon">
+			<b-icon :icon="summaryShown ? 'chevron-up' : 'chevron-down'"></b-icon>
+		</a>
+	</div>
+	<div class="card-content content" v-show="summaryShown">
+		<ul id="summary-list"> 
+		<li><b>Enrichment method:</b> ORA</li>
+		<li><b>Organism: </b>hsapiens</li>
+		<li>
+				<b>Enrichment Categories: </b>pathway_Reactome
+				<a class="has-text-info" href="https://www.webgestalt.org//api/geneset?organism=hsapiens&database=pathway_Reactome&fileType=gmt">
+					<b-icon icon="download" size="is-small"></b-icon>
+				</a>
+		</li>
+
+			<li><b>Interesting list: </b>GeneLLM_all_cluster2.txt. <b>ID type: </b>genesymbol</li>
+			<li>The interesting list contains <b>44</b> user IDs in which <b>43</b> user IDs are unambiguously mapped to <b>43</b> unique entrezgene IDs and <b>1</b> user IDs can not be mapped to any entrezgene ID.</li>
+			<li>The GO Slim summary are based upon the <b>43</b> unique entrezgene IDs.</li>
+		<li>Among <b>43</b> unique entrezgene IDs, <b>26</b> IDs are annotated to the selected functional categories and also in the reference list, which are used for the enrichment analysis.</li>
+	<li><b>Reference list: </b>a R object. <b>ID type: </b>genesymbol</li>
+	<li>The reference list can be mapped to <b>383</b> entrezgene IDs and <b> 273</b> IDs are annotated to the selected functional categories that are used as the reference for the enrichment analysis.</li>
+</ul> 
+
+<p><b>Parameters for the enrichment analysis:</b></p>
+<ul><li><b>Minimum number of IDs in the category: </b>3</li>
+<li><b>Maximum number of IDs in the category: </b>500</li>
+<li><b>FDR Method: </b>BH</li>
+<li><b>Significance Level:</b> FDR < 0.05</li>
+</ul>
+	<p>Based on the above parameters, <b>19</b> categories are identified as enriched categories and all are shown in this report.</p>
+
+	</div>
+</div>
+</section>
+<section id="go-summary" class="summary">
+<div class="card" v-bind:class="{active: goShown}" >
+	<div class="card-header" v-on:click="goShown=!goShown">
+		<p class="card-header-title">GO Slim summary for the user uploaded IDs</p>
+		<a href="#" class="card-header-icon">
+			<b-icon :icon="goShown ? 'chevron-up' : 'chevron-down'"></b-icon>
+		</a>
+	</div>
+	<div v-show="goShown">
+		<div class="card-content">
+			<p>Each Biological Process, Cellular Component and Molecular Function category is represented by a red, blue and green bar, repectively.</p>
+			<p>The height of the bar represents the number of IDs in the user list and also in the category.</p>
+		</div>
+		<div class="card-image">
+			<img src="goslim_summary_enrichment_analysis_all_disease_res_Reactome_cluster2.png" width="100%" height="100%" alt="Bar charts of enriched GO Slim terms"/>
+		</div>
+	</div>
+</div>
+</section> <h4 class="title is-4 has-text-primary">Enrichment Results</h4>
+<section id="enrich-result">
+	<p class="select-redundancy">
+		<b-tooltip label="Enriched gene sets are post-processed by two methods to reduce redundancy." type="is-dark" animated multilined dashed>
+			Redundancy reduction:
+		</b-tooltip>
+		<b-radio v-model="redundancy" native-value="all">All</b-radio>
+		<b-radio v-model="redundancy" native-value="ap">
+			<b-tooltip label="R package apcluster is used to cluster gene sets." type="is-dark" animated multilined dashed>
+				Affinity propagation
+			</b-tooltip>
+		</b-radio>
+		<b-radio v-model="redundancy" native-value="wsc">
+			<b-tooltip label="Find top gene sets while maximizing gene coverage." type="is-dark" animated multilined dashed>
+				Weighted set cover
+			</b-tooltip>
+		</b-radio>
+	</p>
+	<b-tabs v-model="activeTab" type="is-toggle">
+		<b-tab-item label="Table">
+			<wg-result-table
+				:data="enrichmentData"
+				:method="enrichMethod"
+			></wg-result-table>
+		</b-tab-item>
+		<b-tab-item label="Bar chart">
+		<div class="vertical-center-container">
+			<wg-bar-plot
+				:dimensions="bar.dimensions"
+				:label-width="bar.labelWidth"
+				:data="enrichmentData"
+				:value-key="bar.valueKey"
+				:x-label="bar.xLabel">
+			</wg-bar-plot>
+		</div>
+		</b-tab-item>
+		<b-tab-item label="Volcano plot">
+		<div class="vertical-center-container">
+			<wg-volcano-plot
+				:data="volcanoData"
+				:x="volcano.x"
+				:y="volcano.y"
+				:dimensions="volcano.dimensions"
+				:x-label="volcano.xLabel"
+				:label-types="volcano.labelTypes"
+				:x-transform="volcano.xTransform"
+				:radius="volcano.radius"
+				:color="volcano.color"
+				:tooltip-content="volcano.tooltipContent"
+				:show-all-labels="false"
+				:auto-place-labels="true"
+			></wg-volcano-plot>
+		</div>
+		</b-tab-item>
+	</b-tabs>
+	<wg-gene-table
+		:data="geneTables"
+		:info="enrichment"
+		:standard-id="standardId"
+		:method="enrichMethod"
+		:mapped-input-size="mappedInputSize"
+		:organism="organism"
+		:host-name="hostName"
+		:sets-with-net="false"
+	></wg-gene-table>
+</section> 
+
+</div>
+</div>
+</main>
+	<script type="text/javascript" src="https://www.webgestalt.org//assets/0.4/build/wg.min.js"></script>
+<script type="text/javascript">
+var enrichment = [{"geneSet":"R-HSA-112316","description":"Neuronal System","link":"http://reactome.org/PathwayBrowser/#/R-HSA-112316","size":40,"overlap":20,"expect":3.8095238095238093,"enrichmentRatio":5.25,"pValue":1.8540724511240114e-14,"FDR":4.0439873671971327e-12,"overlapId":"1741;200909;2550;2556;2557;2559;2570;2741;2890;2892;2898;2899;2905;2911;2915;57554;57596;80852;85358;9568"},{"geneSet":"R-HSA-112314","description":"Neurotransmitter receptors and postsynaptic signal transmission","link":"http://reactome.org/PathwayBrowser/#/R-HSA-112314","size":23,"overlap":16,"expect":2.1904761904761902,"enrichmentRatio":7.304347826086957,"pValue":3.4416913763379853e-14,"FDR":4.0439873671971327e-12,"overlapId":"1741;200909;2550;2556;2557;2559;2570;2741;2890;2892;2898;2899;2905;57554;80852;9568"},{"geneSet":"R-HSA-112315","description":"Transmission across Chemical Synapses","link":"http://reactome.org/PathwayBrowser/#/R-HSA-112315","size":29,"overlap":16,"expect":2.7619047619047619,"enrichmentRatio":5.7931034482758621,"pValue":7.5540684818520276e-12,"FDR":5.9173536441174213e-10,"overlapId":"1741;200909;2550;2556;2557;2559;2570;2741;2890;2892;2898;2899;2905;57554;80852;9568"},{"geneSet":"R-HSA-6794362","description":"Protein-protein interactions at synapses","link":"http://reactome.org/PathwayBrowser/#/R-HSA-6794362","size":8,"overlap":8,"expect":0.76190476190476186,"enrichmentRatio":10.5,"pValue":2.2642971941877477e-09,"FDR":1.0642196812682414e-07,"overlapId":"1741;2890;2892;2905;2911;2915;57596;85358"},{"geneSet":"R-HSA-420499","description":"Class C/3 (Metabotropic glutamate/pheromone receptors)","link":"http://reactome.org/PathwayBrowser/#/R-HSA-420499","size":8,"overlap":8,"expect":0.76190476190476186,"enrichmentRatio":10.5,"pValue":2.2642971941877477e-09,"FDR":1.0642196812682414e-07,"overlapId":"2550;2911;2912;2913;2914;2915;2916;9568"},{"geneSet":"R-HSA-6794361","description":"Neurexins and neuroligins","link":"http://reactome.org/PathwayBrowser/#/R-HSA-6794361","size":6,"overlap":6,"expect":0.5714285714285714,"enrichmentRatio":10.5,"pValue":4.2319714554928112e-07,"FDR":1.6575221534013508e-05,"overlapId":"1741;2905;2911;2915;57596;85358"},{"geneSet":"R-HSA-438066","description":"Unblocking of NMDA receptors, glutamate binding and activation","link":"http://reactome.org/PathwayBrowser/#/R-HSA-438066","size":6,"overlap":5,"expect":0.5714285714285714,"enrichmentRatio":8.75,"pValue":3.0288824278024151e-05,"FDR":0.0010168391007622393,"overlapId":"1741;2890;2892;2905;57554"},{"geneSet":"R-HSA-8849932","description":"Synaptic adhesion-like molecules","link":"http://reactome.org/PathwayBrowser/#/R-HSA-8849932","size":4,"overlap":4,"expect":0.38095238095238093,"enrichmentRatio":10.5,"pValue":6.6037074936575735e-05,"FDR":0.0017782231934732051,"overlapId":"1741;2890;2892;2905"},{"geneSet":"R-HSA-977443","description":"GABA receptor activation","link":"http://reactome.org/PathwayBrowser/#/R-HSA-977443","size":10,"overlap":6,"expect":0.95238095238095233,"enrichmentRatio":6.3000000000000007,"pValue":6.8102164856420622e-05,"FDR":0.0017782231934732051,"overlapId":"2550;2556;2557;2559;2570;9568"},{"geneSet":"R-HSA-442755","description":"Activation of NMDA receptors and postsynaptic events","link":"http://reactome.org/PathwayBrowser/#/R-HSA-442755","size":7,"overlap":5,"expect":0.66666666666666663,"enrichmentRatio":7.5,"pValue":9.9080437335974381e-05,"FDR":0.0023283902773953979,"overlapId":"1741;2890;2892;2905;57554"},{"geneSet":"R-HSA-416993","description":"Trafficking of GluR2-containing AMPA receptors","link":"http://reactome.org/PathwayBrowser/#/R-HSA-416993","size":3,"overlap":3,"expect":0.2857142857142857,"enrichmentRatio":10.5,"pValue":0.00077521783621192775,"FDR":0.013012585107843071,"overlapId":"2890;2892;80852"},{"geneSet":"R-HSA-451306","description":"Ionotropic activity of kainate receptors","link":"http://reactome.org/PathwayBrowser/#/R-HSA-451306","size":3,"overlap":3,"expect":0.2857142857142857,"enrichmentRatio":10.5,"pValue":0.00077521783621192775,"FDR":0.013012585107843071,"overlapId":"1741;2898;2899"},{"geneSet":"R-HSA-451308","description":"Activation of Ca-permeable Kainate Receptor","link":"http://reactome.org/PathwayBrowser/#/R-HSA-451308","size":3,"overlap":3,"expect":0.2857142857142857,"enrichmentRatio":10.5,"pValue":0.00077521783621192775,"FDR":0.013012585107843071,"overlapId":"1741;2898;2899"},{"geneSet":"R-HSA-977441","description":"GABA A receptor activation","link":"http://reactome.org/PathwayBrowser/#/R-HSA-977441","size":3,"overlap":3,"expect":0.2857142857142857,"enrichmentRatio":10.5,"pValue":0.00077521783621192775,"FDR":0.013012585107843071,"overlapId":"2556;2557;2559"},{"geneSet":"R-HSA-399719","description":"Trafficking of AMPA receptors","link":"http://reactome.org/PathwayBrowser/#/R-HSA-399719","size":4,"overlap":3,"expect":0.38095238095238093,"enrichmentRatio":7.875,"pValue":0.0029027601200382058,"FDR":0.035902559379419913,"overlapId":"2890;2892;80852"},{"geneSet":"R-HSA-399721","description":"Glutamate binding, activation of AMPA receptors and synaptic plasticity","link":"http://reactome.org/PathwayBrowser/#/R-HSA-399721","size":4,"overlap":3,"expect":0.38095238095238093,"enrichmentRatio":7.875,"pValue":0.0029027601200382058,"FDR":0.035902559379419913,"overlapId":"2890;2892;80852"},{"geneSet":"R-HSA-451326","description":"Activation of kainate receptors upon glutamate binding","link":"http://reactome.org/PathwayBrowser/#/R-HSA-451326","size":4,"overlap":3,"expect":0.38095238095238093,"enrichmentRatio":7.875,"pValue":0.0029027601200382058,"FDR":0.035902559379419913,"overlapId":"1741;2898;2899"},{"geneSet":"R-HSA-442729","description":"CREB phosphorylation through the activation of CaMKII","link":"http://reactome.org/PathwayBrowser/#/R-HSA-442729","size":4,"overlap":3,"expect":0.38095238095238093,"enrichmentRatio":7.875,"pValue":0.0029027601200382058,"FDR":0.035902559379419913,"overlapId":"1741;2905;57554"},{"geneSet":"R-HSA-442982","description":"Ras activation upon Ca2+ influx through NMDA receptor","link":"http://reactome.org/PathwayBrowser/#/R-HSA-442982","size":4,"overlap":3,"expect":0.38095238095238093,"enrichmentRatio":7.875,"pValue":0.0029027601200382058,"FDR":0.035902559379419913,"overlapId":"1741;2905;57554"}];
+var background = [{"geneSet":"R-HSA-438064","enrichmentRatio":6.3000000000000007,"FDR":0.076028397918959018,"overlap":3},{"geneSet":"R-HSA-442742","enrichmentRatio":6.3000000000000007,"FDR":0.076028397918959018,"overlap":3},{"geneSet":"R-HSA-5673001","enrichmentRatio":4.5,"FDR":0.21303346809498974,"overlap":3},{"geneSet":"R-HSA-5684996","enrichmentRatio":4.5,"FDR":0.21303346809498974,"overlap":3},{"geneSet":"R-HSA-1296041","enrichmentRatio":7,"FDR":0.22334100401443577,"overlap":2},{"geneSet":"R-HSA-1296059","enrichmentRatio":7,"FDR":0.22334100401443577,"overlap":2},{"geneSet":"R-HSA-997272","enrichmentRatio":7,"FDR":0.22334100401443577,"overlap":2},{"geneSet":"R-HSA-5683057","enrichmentRatio":3.9375,"FDR":0.2719415101538632,"overlap":3},{"geneSet":"R-HSA-1296065","enrichmentRatio":5.25,"FDR":0.39041369930506004,"overlap":2},{"geneSet":"R-HSA-977444","enrichmentRatio":3.5,"FDR":0.80791411930922985,"overlap":2},{"geneSet":"R-HSA-991365","enrichmentRatio":3.5,"FDR":0.80791411930922985,"overlap":2},{"geneSet":"R-HSA-418594","enrichmentRatio":1.4000000000000001,"FDR":1,"overlap":6},{"geneSet":"R-HSA-1296071","enrichmentRatio":2.1000000000000001,"FDR":1,"overlap":2},{"geneSet":"R-HSA-500792","enrichmentRatio":1.1666666666666667,"FDR":1,"overlap":8},{"geneSet":"R-HSA-422475","enrichmentRatio":1.4000000000000001,"FDR":1,"overlap":2},{"geneSet":"R-HSA-2672351","enrichmentRatio":1.75,"FDR":1,"overlap":1},{"geneSet":"R-HSA-597592","enrichmentRatio":1.1052631578947369,"FDR":1,"overlap":2},{"geneSet":"R-HSA-6798695","enrichmentRatio":1.1666666666666667,"FDR":1,"overlap":1},{"geneSet":"R-HSA-199991","enrichmentRatio":1.1666666666666667,"FDR":1,"overlap":1},{"geneSet":"R-HSA-983712","enrichmentRatio":1.1666666666666667,"FDR":1,"overlap":1},{"geneSet":"R-HSA-5653656","enrichmentRatio":1.05,"FDR":1,"overlap":1},{"geneSet":"R-HSA-388396","enrichmentRatio":0.9545454545454547,"FDR":1,"overlap":8},{"geneSet":"R-HSA-372790","enrichmentRatio":0.93333333333333335,"FDR":1,"overlap":8},{"geneSet":"R-HSA-382551","enrichmentRatio":0.70000000000000007,"FDR":1,"overlap":1},{"geneSet":"R-HSA-1266738","enrichmentRatio":0.72413793103448276,"FDR":1,"overlap":2},{"geneSet":"R-HSA-162582","enrichmentRatio":0.875,"FDR":1,"overlap":11},{"geneSet":"R-HSA-416476","enrichmentRatio":0.70000000000000007,"FDR":1,"overlap":2},{"geneSet":"R-HSA-168249","enrichmentRatio":0.45652173913043481,"FDR":1,"overlap":1},{"geneSet":"R-HSA-392499","enrichmentRatio":0.51219512195121952,"FDR":1,"overlap":2},{"geneSet":"R-HSA-168256","enrichmentRatio":0.15000000000000002,"FDR":1,"overlap":1}];
+var geneTables = {"R-HSA-112316":[{"userId":"GABBR1","geneSymbol":"GABBR1","geneName":"gamma-aminobutyric acid type B receptor subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2550","entrezgene":"2550"},{"userId":"GABBR2","geneSymbol":"GABBR2","geneName":"gamma-aminobutyric acid type B receptor subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=9568","entrezgene":"9568"},{"userId":"GRM1","geneSymbol":"GRM1","geneName":"glutamate metabotropic receptor 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2911","entrezgene":"2911"},{"userId":"GRIK3","geneSymbol":"GRIK3","geneName":"glutamate ionotropic receptor kainate type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2899","entrezgene":"2899"},{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"GABRA4","geneSymbol":"GABRA4","geneName":"gamma-aminobutyric acid type A receptor alpha4 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2557","entrezgene":"2557"},{"userId":"GRIK2","geneSymbol":"GRIK2","geneName":"glutamate ionotropic receptor kainate type subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2898","entrezgene":"2898"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"GABRA6","geneSymbol":"GABRA6","geneName":"gamma-aminobutyric acid type A receptor alpha6 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2559","entrezgene":"2559"},{"userId":"GRM5","geneSymbol":"GRM5","geneName":"glutamate metabotropic receptor 5","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2915","entrezgene":"2915"},{"userId":"GABRR2","geneSymbol":"GABRR2","geneName":"gamma-aminobutyric acid type A receptor rho2 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2570","entrezgene":"2570"},{"userId":"GABRA3","geneSymbol":"GABRA3","geneName":"gamma-aminobutyric acid type A receptor alpha3 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2556","entrezgene":"2556"},{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"HTR3D","geneSymbol":"HTR3D","geneName":"5-hydroxytryptamine receptor 3D","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=200909","entrezgene":"200909"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"},{"userId":"GLRA1","geneSymbol":"GLRA1","geneName":"glycine receptor alpha 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2741","entrezgene":"2741"},{"userId":"LRRC7","geneSymbol":"LRRC7","geneName":"leucine rich repeat containing 7","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57554","entrezgene":"57554"},{"userId":"BEGAIN","geneSymbol":"BEGAIN","geneName":"brain enriched guanylate kinase associated","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57596","entrezgene":"57596"},{"userId":"SHANK3","geneSymbol":"SHANK3","geneName":"SH3 and multiple ankyrin repeat domains 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=85358","entrezgene":"85358"},{"userId":"GRIP2","geneSymbol":"GRIP2","geneName":"glutamate receptor interacting protein 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=80852","entrezgene":"80852"}],"R-HSA-112314":[{"userId":"GABBR1","geneSymbol":"GABBR1","geneName":"gamma-aminobutyric acid type B receptor subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2550","entrezgene":"2550"},{"userId":"GABBR2","geneSymbol":"GABBR2","geneName":"gamma-aminobutyric acid type B receptor subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=9568","entrezgene":"9568"},{"userId":"GRIK3","geneSymbol":"GRIK3","geneName":"glutamate ionotropic receptor kainate type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2899","entrezgene":"2899"},{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"GABRA4","geneSymbol":"GABRA4","geneName":"gamma-aminobutyric acid type A receptor alpha4 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2557","entrezgene":"2557"},{"userId":"GRIK2","geneSymbol":"GRIK2","geneName":"glutamate ionotropic receptor kainate type subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2898","entrezgene":"2898"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"GABRA6","geneSymbol":"GABRA6","geneName":"gamma-aminobutyric acid type A receptor alpha6 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2559","entrezgene":"2559"},{"userId":"GABRR2","geneSymbol":"GABRR2","geneName":"gamma-aminobutyric acid type A receptor rho2 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2570","entrezgene":"2570"},{"userId":"GABRA3","geneSymbol":"GABRA3","geneName":"gamma-aminobutyric acid type A receptor alpha3 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2556","entrezgene":"2556"},{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"HTR3D","geneSymbol":"HTR3D","geneName":"5-hydroxytryptamine receptor 3D","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=200909","entrezgene":"200909"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"},{"userId":"GLRA1","geneSymbol":"GLRA1","geneName":"glycine receptor alpha 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2741","entrezgene":"2741"},{"userId":"LRRC7","geneSymbol":"LRRC7","geneName":"leucine rich repeat containing 7","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57554","entrezgene":"57554"},{"userId":"GRIP2","geneSymbol":"GRIP2","geneName":"glutamate receptor interacting protein 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=80852","entrezgene":"80852"}],"R-HSA-112315":[{"userId":"GABBR1","geneSymbol":"GABBR1","geneName":"gamma-aminobutyric acid type B receptor subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2550","entrezgene":"2550"},{"userId":"GABBR2","geneSymbol":"GABBR2","geneName":"gamma-aminobutyric acid type B receptor subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=9568","entrezgene":"9568"},{"userId":"GRIK3","geneSymbol":"GRIK3","geneName":"glutamate ionotropic receptor kainate type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2899","entrezgene":"2899"},{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"GABRA4","geneSymbol":"GABRA4","geneName":"gamma-aminobutyric acid type A receptor alpha4 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2557","entrezgene":"2557"},{"userId":"GRIK2","geneSymbol":"GRIK2","geneName":"glutamate ionotropic receptor kainate type subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2898","entrezgene":"2898"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"GABRA6","geneSymbol":"GABRA6","geneName":"gamma-aminobutyric acid type A receptor alpha6 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2559","entrezgene":"2559"},{"userId":"GABRR2","geneSymbol":"GABRR2","geneName":"gamma-aminobutyric acid type A receptor rho2 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2570","entrezgene":"2570"},{"userId":"GABRA3","geneSymbol":"GABRA3","geneName":"gamma-aminobutyric acid type A receptor alpha3 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2556","entrezgene":"2556"},{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"HTR3D","geneSymbol":"HTR3D","geneName":"5-hydroxytryptamine receptor 3D","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=200909","entrezgene":"200909"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"},{"userId":"GLRA1","geneSymbol":"GLRA1","geneName":"glycine receptor alpha 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2741","entrezgene":"2741"},{"userId":"LRRC7","geneSymbol":"LRRC7","geneName":"leucine rich repeat containing 7","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57554","entrezgene":"57554"},{"userId":"GRIP2","geneSymbol":"GRIP2","geneName":"glutamate receptor interacting protein 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=80852","entrezgene":"80852"}],"R-HSA-6794362":[{"userId":"GRM1","geneSymbol":"GRM1","geneName":"glutamate metabotropic receptor 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2911","entrezgene":"2911"},{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"GRM5","geneSymbol":"GRM5","geneName":"glutamate metabotropic receptor 5","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2915","entrezgene":"2915"},{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"},{"userId":"BEGAIN","geneSymbol":"BEGAIN","geneName":"brain enriched guanylate kinase associated","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57596","entrezgene":"57596"},{"userId":"SHANK3","geneSymbol":"SHANK3","geneName":"SH3 and multiple ankyrin repeat domains 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=85358","entrezgene":"85358"}],"R-HSA-420499":[{"userId":"GABBR1","geneSymbol":"GABBR1","geneName":"gamma-aminobutyric acid type B receptor subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2550","entrezgene":"2550"},{"userId":"GABBR2","geneSymbol":"GABBR2","geneName":"gamma-aminobutyric acid type B receptor subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=9568","entrezgene":"9568"},{"userId":"GRM2","geneSymbol":"GRM2","geneName":"glutamate metabotropic receptor 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2912","entrezgene":"2912"},{"userId":"GRM4","geneSymbol":"GRM4","geneName":"glutamate metabotropic receptor 4","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2914","entrezgene":"2914"},{"userId":"GRM1","geneSymbol":"GRM1","geneName":"glutamate metabotropic receptor 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2911","entrezgene":"2911"},{"userId":"GRM6","geneSymbol":"GRM6","geneName":"glutamate metabotropic receptor 6","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2916","entrezgene":"2916"},{"userId":"GRM3","geneSymbol":"GRM3","geneName":"glutamate metabotropic receptor 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2913","entrezgene":"2913"},{"userId":"GRM5","geneSymbol":"GRM5","geneName":"glutamate metabotropic receptor 5","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2915","entrezgene":"2915"}],"R-HSA-6794361":[{"userId":"GRM1","geneSymbol":"GRM1","geneName":"glutamate metabotropic receptor 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2911","entrezgene":"2911"},{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"GRM5","geneSymbol":"GRM5","geneName":"glutamate metabotropic receptor 5","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2915","entrezgene":"2915"},{"userId":"BEGAIN","geneSymbol":"BEGAIN","geneName":"brain enriched guanylate kinase associated","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57596","entrezgene":"57596"},{"userId":"SHANK3","geneSymbol":"SHANK3","geneName":"SH3 and multiple ankyrin repeat domains 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=85358","entrezgene":"85358"}],"R-HSA-438066":[{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"},{"userId":"LRRC7","geneSymbol":"LRRC7","geneName":"leucine rich repeat containing 7","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57554","entrezgene":"57554"}],"R-HSA-8849932":[{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"}],"R-HSA-977443":[{"userId":"GABBR1","geneSymbol":"GABBR1","geneName":"gamma-aminobutyric acid type B receptor subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2550","entrezgene":"2550"},{"userId":"GABBR2","geneSymbol":"GABBR2","geneName":"gamma-aminobutyric acid type B receptor subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=9568","entrezgene":"9568"},{"userId":"GABRA4","geneSymbol":"GABRA4","geneName":"gamma-aminobutyric acid type A receptor alpha4 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2557","entrezgene":"2557"},{"userId":"GABRA6","geneSymbol":"GABRA6","geneName":"gamma-aminobutyric acid type A receptor alpha6 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2559","entrezgene":"2559"},{"userId":"GABRR2","geneSymbol":"GABRR2","geneName":"gamma-aminobutyric acid type A receptor rho2 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2570","entrezgene":"2570"},{"userId":"GABRA3","geneSymbol":"GABRA3","geneName":"gamma-aminobutyric acid type A receptor alpha3 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2556","entrezgene":"2556"}],"R-HSA-442755":[{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"},{"userId":"LRRC7","geneSymbol":"LRRC7","geneName":"leucine rich repeat containing 7","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57554","entrezgene":"57554"}],"R-HSA-416993":[{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"},{"userId":"GRIP2","geneSymbol":"GRIP2","geneName":"glutamate receptor interacting protein 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=80852","entrezgene":"80852"}],"R-HSA-451306":[{"userId":"GRIK3","geneSymbol":"GRIK3","geneName":"glutamate ionotropic receptor kainate type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2899","entrezgene":"2899"},{"userId":"GRIK2","geneSymbol":"GRIK2","geneName":"glutamate ionotropic receptor kainate type subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2898","entrezgene":"2898"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"}],"R-HSA-451308":[{"userId":"GRIK3","geneSymbol":"GRIK3","geneName":"glutamate ionotropic receptor kainate type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2899","entrezgene":"2899"},{"userId":"GRIK2","geneSymbol":"GRIK2","geneName":"glutamate ionotropic receptor kainate type subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2898","entrezgene":"2898"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"}],"R-HSA-977441":[{"userId":"GABRA4","geneSymbol":"GABRA4","geneName":"gamma-aminobutyric acid type A receptor alpha4 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2557","entrezgene":"2557"},{"userId":"GABRA6","geneSymbol":"GABRA6","geneName":"gamma-aminobutyric acid type A receptor alpha6 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2559","entrezgene":"2559"},{"userId":"GABRA3","geneSymbol":"GABRA3","geneName":"gamma-aminobutyric acid type A receptor alpha3 subunit","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2556","entrezgene":"2556"}],"R-HSA-399719":[{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"},{"userId":"GRIP2","geneSymbol":"GRIP2","geneName":"glutamate receptor interacting protein 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=80852","entrezgene":"80852"}],"R-HSA-399721":[{"userId":"GRIA3","geneSymbol":"GRIA3","geneName":"glutamate ionotropic receptor AMPA type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2892","entrezgene":"2892"},{"userId":"GRIA1","geneSymbol":"GRIA1","geneName":"glutamate ionotropic receptor AMPA type subunit 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2890","entrezgene":"2890"},{"userId":"GRIP2","geneSymbol":"GRIP2","geneName":"glutamate receptor interacting protein 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=80852","entrezgene":"80852"}],"R-HSA-451326":[{"userId":"GRIK3","geneSymbol":"GRIK3","geneName":"glutamate ionotropic receptor kainate type subunit 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2899","entrezgene":"2899"},{"userId":"GRIK2","geneSymbol":"GRIK2","geneName":"glutamate ionotropic receptor kainate type subunit 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2898","entrezgene":"2898"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"}],"R-HSA-442729":[{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"LRRC7","geneSymbol":"LRRC7","geneName":"leucine rich repeat containing 7","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57554","entrezgene":"57554"}],"R-HSA-442982":[{"userId":"GRIN2C","geneSymbol":"GRIN2C","geneName":"glutamate ionotropic receptor NMDA type subunit 2C","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2905","entrezgene":"2905"},{"userId":"DLG3","geneSymbol":"DLG3","geneName":"discs large MAGUK scaffold protein 3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=1741","entrezgene":"1741"},{"userId":"LRRC7","geneSymbol":"LRRC7","geneName":"leucine rich repeat containing 7","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=57554","entrezgene":"57554"}]};
+var clusters = {"ap":{"clusters":[["R-HSA-112314","R-HSA-112316","R-HSA-112315","R-HSA-977443","R-HSA-977441"],["R-HSA-6794362","R-HSA-420499","R-HSA-6794361"],["R-HSA-438066","R-HSA-8849932","R-HSA-442755","R-HSA-442729","R-HSA-442982"],["R-HSA-416993","R-HSA-399719","R-HSA-399721"],["R-HSA-451306","R-HSA-451308","R-HSA-451326"]],"representatives":["R-HSA-112314","R-HSA-6794362","R-HSA-438066","R-HSA-416993","R-HSA-451306"]},"wsc":{"representatives":["R-HSA-112316","R-HSA-420499"],"coverage":[1]}};
+
+wgLib({
+	enrichDatabase: "pathway_Reactome",
+	organism: "hsapiens",
+	hostName: "https://www.webgestalt.org/",
+	enrichment: enrichment,
+	background: background,
+	geneTables: geneTables,
+	clusters: clusters,
+	enrichMethod: "ora",
+	mappedInputSize: 26,
+	standardId: "entrezgene",
+	volcano: {
+		labelTypes: ["geneSet", "description"],
+		dimensions: { width: 960, height: 500 },
+		autoPlaceLabels: true,
+		y: "FDR",
+
+		x: "enrichmentRatio",
+		xLabel: "log2 of enrichment ratio",
+		radius: "overlap",
+		color: "overlap",
+			tooltipContent: ["geneSet", "description", "enrichmentRatio", "FDR", "pValue", "overlap"]
+	},
+	bar: {
+		dimensions: { width: 960, height: 300 },
+		labelWidth: 200,
+		tooltipContent: ["geneSet", "description", "enrichmentRatio", "FDR", "pValue", "overlap"],
+		valueKey: "enrichmentRatio",
+		xLabel: "Enrichment ratio"
+	}
+})
+
+
+</script>
+<footer class="footer has-text-centered">
+<p>WebGestalt is currently developed and maintained by Yuxing Liao, Suhas Vasaikar, Zhiao Shi and Bing Zhang at the <a target="_new" href=http://www.zhang-lab.org> Zhang Lab</a>. Other people who have made significant contribution to the project include Jing Wang, Dexter Duncan, Stefan Kirov and Jay Snoddy.</p>
+<p><b>Funding credits:</b> NIH/NCI (U24 CA210954); Leidos (15X038); CPRIT (RR160027); NIH/NIAAA (U01 AA016662, U01 AA013512); NIH/NIDA (P01 DA015027); NIH/NIMH (P50 MH078028, P50 MH096972); NIH/NCI (U24 CA159988); NIH/NIGMS (R01 GM088822).
+</p>
+</footer></body>
+</html>

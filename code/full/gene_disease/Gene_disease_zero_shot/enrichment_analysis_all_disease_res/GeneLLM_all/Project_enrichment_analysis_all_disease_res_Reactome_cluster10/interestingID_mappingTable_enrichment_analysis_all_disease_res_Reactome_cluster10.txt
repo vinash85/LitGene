@@ -1,0 +1,23 @@
+userId	geneSymbol	geneName	entrezgene	gLink
+GPR88	GPR88	G protein-coupled receptor 88	54112	https://www.ncbi.nlm.nih.gov/gene/?term=54112
+DRD5	DRD5	dopamine receptor D5	1816	https://www.ncbi.nlm.nih.gov/gene/?term=1816
+DRD1	DRD1	dopamine receptor D1	1812	https://www.ncbi.nlm.nih.gov/gene/?term=1812
+YWHAH	YWHAH	tyrosine 3-monooxygenase/tryptophan 5-monooxygenase activation protein eta	7533	https://www.ncbi.nlm.nih.gov/gene/?term=7533
+GPR153	GPR153	G protein-coupled receptor 153	387509	https://www.ncbi.nlm.nih.gov/gene/?term=387509
+DRD2	DRD2	dopamine receptor D2	1813	https://www.ncbi.nlm.nih.gov/gene/?term=1813
+NPAS4	NPAS4	neuronal PAS domain protein 4	266743	https://www.ncbi.nlm.nih.gov/gene/?term=266743
+NR4A2	NR4A2	nuclear receptor subfamily 4 group A member 2	4929	https://www.ncbi.nlm.nih.gov/gene/?term=4929
+GPR78	GPR78	G protein-coupled receptor 78	27201	https://www.ncbi.nlm.nih.gov/gene/?term=27201
+ZNF804A	ZNF804A	zinc finger protein 804A	91752	https://www.ncbi.nlm.nih.gov/gene/?term=91752
+GPR52	GPR52	G protein-coupled receptor 52	9293	https://www.ncbi.nlm.nih.gov/gene/?term=9293
+GNB5	GNB5	G protein subunit beta 5	10681	https://www.ncbi.nlm.nih.gov/gene/?term=10681
+SEMA3A	SEMA3A	semaphorin 3A	10371	https://www.ncbi.nlm.nih.gov/gene/?term=10371
+GNAL	GNAL	G protein subunit alpha L	2774	https://www.ncbi.nlm.nih.gov/gene/?term=2774
+BDNF	BDNF	brain derived neurotrophic factor	627	https://www.ncbi.nlm.nih.gov/gene/?term=627
+GPRASP1	GPRASP1	G protein-coupled receptor associated sorting protein 1	9737	https://www.ncbi.nlm.nih.gov/gene/?term=9737
+PRTG	PRTG	protogenin	283659	https://www.ncbi.nlm.nih.gov/gene/?term=283659
+PRR20B	PRR20B	proline rich 20B	729233	https://www.ncbi.nlm.nih.gov/gene/?term=729233
+CNTNAP4	CNTNAP4	contactin associated protein like 4	85445	https://www.ncbi.nlm.nih.gov/gene/?term=85445
+NCDN	NCDN	neurochondrin	23154	https://www.ncbi.nlm.nih.gov/gene/?term=23154
+GPR162	GPR162	G protein-coupled receptor 162	27239	https://www.ncbi.nlm.nih.gov/gene/?term=27239
+ULK4	ULK4	unc-51 like kinase 4	54986	https://www.ncbi.nlm.nih.gov/gene/?term=54986

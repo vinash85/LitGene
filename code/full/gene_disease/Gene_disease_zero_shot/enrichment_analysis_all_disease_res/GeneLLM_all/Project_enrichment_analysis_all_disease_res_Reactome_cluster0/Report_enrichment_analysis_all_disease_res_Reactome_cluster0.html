@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>WebGestalt (WEB-based GEne SeT AnaLysis Toolkit)</title>
+<link rel="icon" type="image/png" href="https://s3-us-west-2.amazonaws.com/webgestalt/favicon.png">
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-42098540-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=es2015%2Ces2016%2Cfetch"></script>
+<script src="https://www.webgestalt.org//assets/0.4/build/vendor.min.js"></script>
+	<script>window.cytoscape = null;</script>
+	<link rel="stylesheet" href="https://www.webgestalt.org//assets/0.4/build/vendor.css">
+	<link rel="stylesheet" href="https://www.webgestalt.org//assets/0.4/build/wg.css">
+<link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css">
+</head>
+<body>
+<header>
+	<div id="header-img"><a href="https://www.webgestalt.org/"><img border="0" src="https://www.webgestalt.org//images/gsa.png"></a></div>
+	<div id="header-title">
+		<p id="header-title-text">WEB-based GEne SeT AnaLysis Toolkit</p>
+		<p id="header-subtitle-text">Translating gene lists into biological insights...</p>
+	</div>
+</header>
+<hr><main>
+<div id="app">
+<div class="loading-preinit" v-cloak><div class="loading-icon"></div></div>
+<div class="wrapper" v-cloak>
+<div class="level">
+	<div class="level-left">
+		<div class="level-item">
+			<h4 class="title is-4 has-text-primary">Summary</h4>
+		</div>
+	</div>
+	<div class="level-right">
+		<div class="level-item">
+			<a class="button is-text" href="Project_enrichment_analysis_all_disease_res_Reactome_cluster0.zip" target="_blank">Result Download</a>
+		</div>
+	</div>
+</div>
+
+<section id="summary" class="summary">
+<div class="card" v-bind:class="{active: summaryShown}" >
+	<div class="card-header" v-on:click="summaryShown=!summaryShown">
+		<p class="card-header-title">Job summary</p>
+		<a href="#" class="card-header-icon">
+			<b-icon :icon="summaryShown ? 'chevron-up' : 'chevron-down'"></b-icon>
+		</a>
+	</div>
+	<div class="card-content content" v-show="summaryShown">
+		<ul id="summary-list"> 
+		<li><b>Enrichment method:</b> ORA</li>
+		<li><b>Organism: </b>hsapiens</li>
+		<li>
+				<b>Enrichment Categories: </b>pathway_Reactome
+				<a class="has-text-info" href="https://www.webgestalt.org//api/geneset?organism=hsapiens&database=pathway_Reactome&fileType=gmt">
+					<b-icon icon="download" size="is-small"></b-icon>
+				</a>
+		</li>
+
+			<li><b>Interesting list: </b>GeneLLM_all_cluster0.txt. <b>ID type: </b>genesymbol</li>
+			<li>The interesting list contains <b>46</b> user IDs in which <b>46</b> user IDs are unambiguously mapped to <b>46</b> unique entrezgene IDs and <b>0</b> user IDs can not be mapped to any entrezgene ID.</li>
+			<li>The GO Slim summary are based upon the <b>46</b> unique entrezgene IDs.</li>
+		<li>Among <b>46</b> unique entrezgene IDs, <b>33</b> IDs are annotated to the selected functional categories and also in the reference list, which are used for the enrichment analysis.</li>
+	<li><b>Reference list: </b>a R object. <b>ID type: </b>genesymbol</li>
+	<li>The reference list can be mapped to <b>383</b> entrezgene IDs and <b> 273</b> IDs are annotated to the selected functional categories that are used as the reference for the enrichment analysis.</li>
+</ul> 
+
+<p><b>Parameters for the enrichment analysis:</b></p>
+<ul><li><b>Minimum number of IDs in the category: </b>3</li>
+<li><b>Maximum number of IDs in the category: </b>500</li>
+<li><b>FDR Method: </b>BH</li>
+<li><b>Significance Level:</b> FDR < 0.05</li>
+</ul>
+	<p>Based on the above parameters, <b>8</b> categories are identified as enriched categories and all are shown in this report.</p>
+
+	</div>
+</div>
+</section>
+<section id="go-summary" class="summary">
+<div class="card" v-bind:class="{active: goShown}" >
+	<div class="card-header" v-on:click="goShown=!goShown">
+		<p class="card-header-title">GO Slim summary for the user uploaded IDs</p>
+		<a href="#" class="card-header-icon">
+			<b-icon :icon="goShown ? 'chevron-up' : 'chevron-down'"></b-icon>
+		</a>
+	</div>
+	<div v-show="goShown">
+		<div class="card-content">
+			<p>Each Biological Process, Cellular Component and Molecular Function category is represented by a red, blue and green bar, repectively.</p>
+			<p>The height of the bar represents the number of IDs in the user list and also in the category.</p>
+		</div>
+		<div class="card-image">
+			<img src="goslim_summary_enrichment_analysis_all_disease_res_Reactome_cluster0.png" width="100%" height="100%" alt="Bar charts of enriched GO Slim terms"/>
+		</div>
+	</div>
+</div>
+</section> <h4 class="title is-4 has-text-primary">Enrichment Results</h4>
+<section id="enrich-result">
+	<p class="select-redundancy">
+		<b-tooltip label="Enriched gene sets are post-processed by two methods to reduce redundancy." type="is-dark" animated multilined dashed>
+			Redundancy reduction:
+		</b-tooltip>
+		<b-radio v-model="redundancy" native-value="all">All</b-radio>
+		<b-radio v-model="redundancy" native-value="ap">
+			<b-tooltip label="R package apcluster is used to cluster gene sets." type="is-dark" animated multilined dashed>
+				Affinity propagation
+			</b-tooltip>
+		</b-radio>
+		<b-radio v-model="redundancy" native-value="wsc">
+			<b-tooltip label="Find top gene sets while maximizing gene coverage." type="is-dark" animated multilined dashed>
+				Weighted set cover
+			</b-tooltip>
+		</b-radio>
+	</p>
+	<b-tabs v-model="activeTab" type="is-toggle">
+		<b-tab-item label="Table">
+			<wg-result-table
+				:data="enrichmentData"
+				:method="enrichMethod"
+			></wg-result-table>
+		</b-tab-item>
+		<b-tab-item label="Bar chart">
+		<div class="vertical-center-container">
+			<wg-bar-plot
+				:dimensions="bar.dimensions"
+				:label-width="bar.labelWidth"
+				:data="enrichmentData"
+				:value-key="bar.valueKey"
+				:x-label="bar.xLabel">
+			</wg-bar-plot>
+		</div>
+		</b-tab-item>
+		<b-tab-item label="Volcano plot">
+		<div class="vertical-center-container">
+			<wg-volcano-plot
+				:data="volcanoData"
+				:x="volcano.x"
+				:y="volcano.y"
+				:dimensions="volcano.dimensions"
+				:x-label="volcano.xLabel"
+				:label-types="volcano.labelTypes"
+				:x-transform="volcano.xTransform"
+				:radius="volcano.radius"
+				:color="volcano.color"
+				:tooltip-content="volcano.tooltipContent"
+				:show-all-labels="false"
+				:auto-place-labels="true"
+			></wg-volcano-plot>
+		</div>
+		</b-tab-item>
+	</b-tabs>
+	<wg-gene-table
+		:data="geneTables"
+		:info="enrichment"
+		:standard-id="standardId"
+		:method="enrichMethod"
+		:mapped-input-size="mappedInputSize"
+		:organism="organism"
+		:host-name="hostName"
+		:sets-with-net="false"
+	></wg-gene-table>
+</section> 
+
+</div>
+</div>
+</main>
+	<script type="text/javascript" src="https://www.webgestalt.org//assets/0.4/build/wg.min.js"></script>
+<script type="text/javascript">
+var enrichment = [{"geneSet":"R-HSA-388396","description":"GPCR downstream signalling","link":"http://reactome.org/PathwayBrowser/#/R-HSA-388396","size":88,"overlap":22,"expect":10.637362637362637,"enrichmentRatio":2.0681818181818183,"pValue":1.5562276837632893e-05,"FDR":0.001433871859453234,"overlapId":"112;11214;133;134;146;147;156;186;187;257313;2767;2773;2848;2868;5581;5731;5732;5734;5739;5997;6915;8862"},{"geneSet":"R-HSA-391903","description":"Eicosanoid ligand-binding receptors","link":"http://reactome.org/PathwayBrowser/#/R-HSA-391903","size":5,"overlap":5,"expect":0.60439560439560436,"enrichmentRatio":8.2727272727272734,"pValue":1.9486236920052136e-05,"FDR":0.001433871859453234,"overlapId":"5731;5732;5734;5739;6915"},{"geneSet":"R-HSA-391908","description":"Prostanoid ligand receptors","link":"http://reactome.org/PathwayBrowser/#/R-HSA-391908","size":5,"overlap":5,"expect":0.60439560439560436,"enrichmentRatio":8.2727272727272734,"pValue":1.9486236920052136e-05,"FDR":0.001433871859453234,"overlapId":"5731;5732;5734;5739;6915"},{"geneSet":"R-HSA-372790","description":"Signaling by GPCR","link":"http://reactome.org/PathwayBrowser/#/R-HSA-372790","size":90,"overlap":22,"expect":10.87912087912088,"enrichmentRatio":2.0222222222222221,"pValue":2.4406329522608239e-05,"FDR":0.001433871859453234,"overlapId":"112;11214;133;134;146;147;156;186;187;257313;2767;2773;2848;2868;5581;5731;5732;5734;5739;5997;6915;8862"},{"geneSet":"R-HSA-162582","description":"Signal Transduction","link":"http://reactome.org/PathwayBrowser/#/R-HSA-162582","size":132,"overlap":26,"expect":15.956043956043956,"enrichmentRatio":1.6294765840220387,"pValue":0.00014960241554740072,"FDR":0.007031313530727834,"overlapId":"112;11214;133;134;143872;146;147;156;186;187;257313;2767;2773;2848;2868;4638;5581;5592;5731;5732;5734;5739;5997;6915;7532;8862"},{"geneSet":"R-HSA-416482","description":"G alpha (12/13) signalling events","link":"http://reactome.org/PathwayBrowser/#/R-HSA-416482","size":5,"overlap":4,"expect":0.60439560439560436,"enrichmentRatio":6.6181818181818182,"pValue":0.00082581328188668923,"FDR":0.03234435354056199,"overlapId":"11214;146;147;6915"},{"geneSet":"R-HSA-112043","description":"PLC beta mediated events","link":"http://reactome.org/PathwayBrowser/#/R-HSA-112043","size":3,"overlap":3,"expect":0.36263736263736263,"enrichmentRatio":8.2727272727272734,"pValue":0.0016267648132202162,"FDR":0.04778621638834385,"overlapId":"112;156;2773"},{"geneSet":"R-HSA-1489509","description":"DAG and IP3 signaling","link":"http://reactome.org/PathwayBrowser/#/R-HSA-1489509","size":3,"overlap":3,"expect":0.36263736263736263,"enrichmentRatio":8.2727272727272734,"pValue":0.0016267648132202162,"FDR":0.04778621638834385,"overlapId":"112;156;5581"}];
+var background = [{"geneSet":"R-HSA-418555","enrichmentRatio":2.8774703557312256,"FDR":0.067841611655436507,"overlap":8},{"geneSet":"R-HSA-416476","enrichmentRatio":2.4818181818181819,"FDR":0.10150951960887977,"overlap":9},{"geneSet":"R-HSA-392518","enrichmentRatio":6.2045454545454541,"FDR":0.11681075117150717,"overlap":3},{"geneSet":"R-HSA-112040","enrichmentRatio":6.2045454545454541,"FDR":0.11681075117150717,"overlap":3},{"geneSet":"R-HSA-194315","enrichmentRatio":4.1363636363636367,"FDR":0.15953802172715836,"overlap":4},{"geneSet":"R-HSA-109582","enrichmentRatio":2.4128787878787881,"FDR":0.25618643911638894,"overlap":7},{"geneSet":"R-HSA-373076","enrichmentRatio":1.7416267942583732,"FDR":0.33832133276329218,"overlap":12},{"geneSet":"R-HSA-111885","enrichmentRatio":4.1363636363636367,"FDR":0.3467303072659863,"overlap":3},{"geneSet":"R-HSA-418597","enrichmentRatio":4.1363636363636367,"FDR":0.3467303072659863,"overlap":3},{"geneSet":"R-HSA-194840","enrichmentRatio":5.5151515151515156,"FDR":0.42096713791960211,"overlap":2},{"geneSet":"R-HSA-445355","enrichmentRatio":5.5151515151515156,"FDR":0.42096713791960211,"overlap":2},{"geneSet":"R-HSA-428930","enrichmentRatio":5.5151515151515156,"FDR":0.42096713791960211,"overlap":2},{"geneSet":"R-HSA-170670","enrichmentRatio":5.5151515151515156,"FDR":0.42096713791960211,"overlap":2},{"geneSet":"R-HSA-997269","enrichmentRatio":5.5151515151515156,"FDR":0.42096713791960211,"overlap":2},{"geneSet":"R-HSA-500792","enrichmentRatio":1.4936868686868687,"FDR":0.59517296084667615,"overlap":13},{"geneSet":"R-HSA-390696","enrichmentRatio":4.1363636363636367,"FDR":0.71336771060018245,"overlap":2},{"geneSet":"R-HSA-195258","enrichmentRatio":3.3090909090909091,"FDR":1,"overlap":2},{"geneSet":"R-HSA-76002","enrichmentRatio":2.0681818181818183,"FDR":1,"overlap":4},{"geneSet":"R-HSA-9006925","enrichmentRatio":2.2561983471074383,"FDR":1,"overlap":3},{"geneSet":"R-HSA-418594","enrichmentRatio":1.4707070707070706,"FDR":1,"overlap":8},{"geneSet":"R-HSA-977444","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":2},{"geneSet":"R-HSA-991365","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":2},{"geneSet":"R-HSA-418346","enrichmentRatio":2.3636363636363638,"FDR":1,"overlap":2},{"geneSet":"R-HSA-199991","enrichmentRatio":1.8383838383838385,"FDR":1,"overlap":2},{"geneSet":"R-HSA-109581","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":1},{"geneSet":"R-HSA-109606","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":1},{"geneSet":"R-HSA-111447","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":1},{"geneSet":"R-HSA-114452","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":1},{"geneSet":"R-HSA-5357801","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":1},{"geneSet":"R-HSA-2187338","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":1},{"geneSet":"R-HSA-114508","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":1},{"geneSet":"R-HSA-202040","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":1},{"geneSet":"R-HSA-163359","enrichmentRatio":2.7575757575757578,"FDR":1,"overlap":1},{"geneSet":"R-HSA-5653656","enrichmentRatio":1.6545454545454545,"FDR":1,"overlap":2},{"geneSet":"R-HSA-977443","enrichmentRatio":1.6545454545454545,"FDR":1,"overlap":2},{"geneSet":"R-HSA-375276","enrichmentRatio":1.2727272727272727,"FDR":1,"overlap":4},{"geneSet":"R-HSA-1280218","enrichmentRatio":2.0681818181818183,"FDR":1,"overlap":1},{"geneSet":"R-HSA-69278","enrichmentRatio":2.0681818181818183,"FDR":1,"overlap":1},{"geneSet":"R-HSA-4090294","enrichmentRatio":2.0681818181818183,"FDR":1,"overlap":1},{"geneSet":"R-HSA-5625740","enrichmentRatio":2.0681818181818183,"FDR":1,"overlap":1},{"geneSet":"R-HSA-381676","enrichmentRatio":2.0681818181818183,"FDR":1,"overlap":1},{"geneSet":"R-HSA-397014","enrichmentRatio":1.240909090909091,"FDR":1,"overlap":3},{"geneSet":"R-HSA-1640170","enrichmentRatio":1.6545454545454545,"FDR":1,"overlap":1},{"geneSet":"R-HSA-195721","enrichmentRatio":1.6545454545454545,"FDR":1,"overlap":1},{"geneSet":"R-HSA-1445148","enrichmentRatio":1.6545454545454545,"FDR":1,"overlap":1},{"geneSet":"R-HSA-422356","enrichmentRatio":1.1818181818181819,"FDR":1,"overlap":2},{"geneSet":"R-HSA-2262752","enrichmentRatio":1.3787878787878789,"FDR":1,"overlap":1},{"geneSet":"R-HSA-383280","enrichmentRatio":1.1818181818181819,"FDR":1,"overlap":1},{"geneSet":"R-HSA-373080","enrichmentRatio":1.1818181818181819,"FDR":1,"overlap":1},{"geneSet":"R-HSA-400042","enrichmentRatio":1.1818181818181819,"FDR":1,"overlap":1},{"geneSet":"R-HSA-5628897","enrichmentRatio":1.0340909090909092,"FDR":1,"overlap":1},{"geneSet":"R-HSA-2990846","enrichmentRatio":1.0340909090909092,"FDR":1,"overlap":1},{"geneSet":"R-HSA-3108232","enrichmentRatio":1.0340909090909092,"FDR":1,"overlap":1},{"geneSet":"R-HSA-6798695","enrichmentRatio":0.91919191919191923,"FDR":1,"overlap":1},{"geneSet":"R-HSA-3700989","enrichmentRatio":0.91919191919191923,"FDR":1,"overlap":1},{"geneSet":"R-HSA-8953897","enrichmentRatio":0.91919191919191923,"FDR":1,"overlap":1},{"geneSet":"R-HSA-163685","enrichmentRatio":0.82727272727272727,"FDR":1,"overlap":2},{"geneSet":"R-HSA-375280","enrichmentRatio":0.82727272727272727,"FDR":1,"overlap":2},{"geneSet":"R-HSA-5663202","enrichmentRatio":0.82727272727272727,"FDR":1,"overlap":1},{"geneSet":"R-HSA-2980736","enrichmentRatio":0.82727272727272727,"FDR":1,"overlap":1},{"geneSet":"R-HSA-1852241","enrichmentRatio":0.75206611570247939,"FDR":1,"overlap":1},{"geneSet":"R-HSA-392499","enrichmentRatio":0.80709534368070945,"FDR":1,"overlap":4},{"geneSet":"R-HSA-212436","enrichmentRatio":0.77556818181818177,"FDR":1,"overlap":3},{"geneSet":"R-HSA-73857","enrichmentRatio":0.77556818181818177,"FDR":1,"overlap":3},{"geneSet":"R-HSA-9006934","enrichmentRatio":0.68939393939393945,"FDR":1,"overlap":1},{"geneSet":"R-HSA-168249","enrichmentRatio":0.71936758893280639,"FDR":1,"overlap":2},{"geneSet":"R-HSA-112314","enrichmentRatio":0.71936758893280639,"FDR":1,"overlap":2},{"geneSet":"R-HSA-74160","enrichmentRatio":0.72994652406417115,"FDR":1,"overlap":3},{"geneSet":"R-HSA-382551","enrichmentRatio":0.55151515151515151,"FDR":1,"overlap":1},{"geneSet":"R-HSA-112315","enrichmentRatio":0.57053291536050155,"FDR":1,"overlap":2},{"geneSet":"R-HSA-5576891","enrichmentRatio":0.48663101604278081,"FDR":1,"overlap":1},{"geneSet":"R-HSA-1430728","enrichmentRatio":0.59090909090909094,"FDR":1,"overlap":3},{"geneSet":"R-HSA-597592","enrichmentRatio":0.43540669856459335,"FDR":1,"overlap":1},{"geneSet":"R-HSA-1643685","enrichmentRatio":0.37603305785123969,"FDR":1,"overlap":1},{"geneSet":"R-HSA-112316","enrichmentRatio":0.41363636363636364,"FDR":1,"overlap":2},{"geneSet":"R-HSA-168256","enrichmentRatio":0.35454545454545455,"FDR":1,"overlap":3}];
+var geneTables = {"R-HSA-388396":[{"userId":"PTGER2","geneSymbol":"PTGER2","geneName":"prostaglandin E receptor 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5732","entrezgene":"5732"},{"userId":"APLNR","geneSymbol":"APLNR","geneName":"apelin receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=187","entrezgene":"187"},{"userId":"AGTR2","geneSymbol":"AGTR2","geneName":"angiotensin II receptor type 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=186","entrezgene":"186"},{"userId":"UTS2B","geneSymbol":"UTS2B","geneName":"urotensin 2B","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=257313","entrezgene":"257313"},{"userId":"ADCY6","geneSymbol":"ADCY6","geneName":"adenylate cyclase 6","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=112","entrezgene":"112"},{"userId":"ADRA1B","geneSymbol":"ADRA1B","geneName":"adrenoceptor alpha 1B","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=147","entrezgene":"147"},{"userId":"GPR25","geneSymbol":"GPR25","geneName":"G protein-coupled receptor 25","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2848","entrezgene":"2848"},{"userId":"TBXA2R","geneSymbol":"TBXA2R","geneName":"thromboxane A2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=6915","entrezgene":"6915"},{"userId":"RGS2","geneSymbol":"RGS2","geneName":"regulator of G protein signaling 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5997","entrezgene":"5997"},{"userId":"PTGER1","geneSymbol":"PTGER1","geneName":"prostaglandin E receptor 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5731","entrezgene":"5731"},{"userId":"GRK2","geneSymbol":"GRK2","geneName":"G protein-coupled receptor kinase 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=156","entrezgene":"156"},{"userId":"GRK4","geneSymbol":"GRK4","geneName":"G protein-coupled receptor kinase 4","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2868","entrezgene":"2868"},{"userId":"AKAP13","geneSymbol":"AKAP13","geneName":"A-kinase anchoring protein 13","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=11214","entrezgene":"11214"},{"userId":"GNA11","geneSymbol":"GNA11","geneName":"G protein subunit alpha 11","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2767","entrezgene":"2767"},{"userId":"PTGER4","geneSymbol":"PTGER4","geneName":"prostaglandin E receptor 4","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5734","entrezgene":"5734"},{"userId":"GNAI3","geneSymbol":"GNAI3","geneName":"G protein subunit alpha i3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2773","entrezgene":"2773"},{"userId":"PTGIR","geneSymbol":"PTGIR","geneName":"prostaglandin I2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5739","entrezgene":"5739"},{"userId":"ADRA1D","geneSymbol":"ADRA1D","geneName":"adrenoceptor alpha 1D","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=146","entrezgene":"146"},{"userId":"ADORA1","geneSymbol":"ADORA1","geneName":"adenosine A1 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=134","entrezgene":"134"},{"userId":"APLN","geneSymbol":"APLN","geneName":"apelin","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=8862","entrezgene":"8862"},{"userId":"ADM","geneSymbol":"ADM","geneName":"adrenomedullin","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=133","entrezgene":"133"},{"userId":"PRKCE","geneSymbol":"PRKCE","geneName":"protein kinase C epsilon","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5581","entrezgene":"5581"}],"R-HSA-391903":[{"userId":"PTGER2","geneSymbol":"PTGER2","geneName":"prostaglandin E receptor 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5732","entrezgene":"5732"},{"userId":"TBXA2R","geneSymbol":"TBXA2R","geneName":"thromboxane A2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=6915","entrezgene":"6915"},{"userId":"PTGER1","geneSymbol":"PTGER1","geneName":"prostaglandin E receptor 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5731","entrezgene":"5731"},{"userId":"PTGER4","geneSymbol":"PTGER4","geneName":"prostaglandin E receptor 4","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5734","entrezgene":"5734"},{"userId":"PTGIR","geneSymbol":"PTGIR","geneName":"prostaglandin I2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5739","entrezgene":"5739"}],"R-HSA-391908":[{"userId":"PTGER2","geneSymbol":"PTGER2","geneName":"prostaglandin E receptor 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5732","entrezgene":"5732"},{"userId":"TBXA2R","geneSymbol":"TBXA2R","geneName":"thromboxane A2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=6915","entrezgene":"6915"},{"userId":"PTGER1","geneSymbol":"PTGER1","geneName":"prostaglandin E receptor 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5731","entrezgene":"5731"},{"userId":"PTGER4","geneSymbol":"PTGER4","geneName":"prostaglandin E receptor 4","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5734","entrezgene":"5734"},{"userId":"PTGIR","geneSymbol":"PTGIR","geneName":"prostaglandin I2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5739","entrezgene":"5739"}],"R-HSA-372790":[{"userId":"PTGER2","geneSymbol":"PTGER2","geneName":"prostaglandin E receptor 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5732","entrezgene":"5732"},{"userId":"APLNR","geneSymbol":"APLNR","geneName":"apelin receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=187","entrezgene":"187"},{"userId":"AGTR2","geneSymbol":"AGTR2","geneName":"angiotensin II receptor type 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=186","entrezgene":"186"},{"userId":"UTS2B","geneSymbol":"UTS2B","geneName":"urotensin 2B","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=257313","entrezgene":"257313"},{"userId":"ADCY6","geneSymbol":"ADCY6","geneName":"adenylate cyclase 6","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=112","entrezgene":"112"},{"userId":"ADRA1B","geneSymbol":"ADRA1B","geneName":"adrenoceptor alpha 1B","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=147","entrezgene":"147"},{"userId":"GPR25","geneSymbol":"GPR25","geneName":"G protein-coupled receptor 25","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2848","entrezgene":"2848"},{"userId":"TBXA2R","geneSymbol":"TBXA2R","geneName":"thromboxane A2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=6915","entrezgene":"6915"},{"userId":"RGS2","geneSymbol":"RGS2","geneName":"regulator of G protein signaling 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5997","entrezgene":"5997"},{"userId":"PTGER1","geneSymbol":"PTGER1","geneName":"prostaglandin E receptor 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5731","entrezgene":"5731"},{"userId":"GRK2","geneSymbol":"GRK2","geneName":"G protein-coupled receptor kinase 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=156","entrezgene":"156"},{"userId":"GRK4","geneSymbol":"GRK4","geneName":"G protein-coupled receptor kinase 4","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2868","entrezgene":"2868"},{"userId":"AKAP13","geneSymbol":"AKAP13","geneName":"A-kinase anchoring protein 13","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=11214","entrezgene":"11214"},{"userId":"GNA11","geneSymbol":"GNA11","geneName":"G protein subunit alpha 11","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2767","entrezgene":"2767"},{"userId":"PTGER4","geneSymbol":"PTGER4","geneName":"prostaglandin E receptor 4","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5734","entrezgene":"5734"},{"userId":"GNAI3","geneSymbol":"GNAI3","geneName":"G protein subunit alpha i3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2773","entrezgene":"2773"},{"userId":"PTGIR","geneSymbol":"PTGIR","geneName":"prostaglandin I2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5739","entrezgene":"5739"},{"userId":"ADRA1D","geneSymbol":"ADRA1D","geneName":"adrenoceptor alpha 1D","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=146","entrezgene":"146"},{"userId":"ADORA1","geneSymbol":"ADORA1","geneName":"adenosine A1 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=134","entrezgene":"134"},{"userId":"APLN","geneSymbol":"APLN","geneName":"apelin","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=8862","entrezgene":"8862"},{"userId":"ADM","geneSymbol":"ADM","geneName":"adrenomedullin","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=133","entrezgene":"133"},{"userId":"PRKCE","geneSymbol":"PRKCE","geneName":"protein kinase C epsilon","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5581","entrezgene":"5581"}],"R-HSA-162582":[{"userId":"PTGER2","geneSymbol":"PTGER2","geneName":"prostaglandin E receptor 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5732","entrezgene":"5732"},{"userId":"APLNR","geneSymbol":"APLNR","geneName":"apelin receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=187","entrezgene":"187"},{"userId":"AGTR2","geneSymbol":"AGTR2","geneName":"angiotensin II receptor type 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=186","entrezgene":"186"},{"userId":"UTS2B","geneSymbol":"UTS2B","geneName":"urotensin 2B","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=257313","entrezgene":"257313"},{"userId":"ARHGAP42","geneSymbol":"ARHGAP42","geneName":"Rho GTPase activating protein 42","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=143872","entrezgene":"143872"},{"userId":"ADCY6","geneSymbol":"ADCY6","geneName":"adenylate cyclase 6","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=112","entrezgene":"112"},{"userId":"ADRA1B","geneSymbol":"ADRA1B","geneName":"adrenoceptor alpha 1B","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=147","entrezgene":"147"},{"userId":"GPR25","geneSymbol":"GPR25","geneName":"G protein-coupled receptor 25","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2848","entrezgene":"2848"},{"userId":"PRKG1","geneSymbol":"PRKG1","geneName":"protein kinase cGMP-dependent 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5592","entrezgene":"5592"},{"userId":"TBXA2R","geneSymbol":"TBXA2R","geneName":"thromboxane A2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=6915","entrezgene":"6915"},{"userId":"RGS2","geneSymbol":"RGS2","geneName":"regulator of G protein signaling 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5997","entrezgene":"5997"},{"userId":"PTGER1","geneSymbol":"PTGER1","geneName":"prostaglandin E receptor 1","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5731","entrezgene":"5731"},{"userId":"GRK2","geneSymbol":"GRK2","geneName":"G protein-coupled receptor kinase 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=156","entrezgene":"156"},{"userId":"YWHAG","geneSymbol":"YWHAG","geneName":"tyrosine 3-monooxygenase/tryptophan 5-monooxygenase activation protein gamma","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=7532","entrezgene":"7532"},{"userId":"GRK4","geneSymbol":"GRK4","geneName":"G protein-coupled receptor kinase 4","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2868","entrezgene":"2868"},{"userId":"AKAP13","geneSymbol":"AKAP13","geneName":"A-kinase anchoring protein 13","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=11214","entrezgene":"11214"},{"userId":"GNA11","geneSymbol":"GNA11","geneName":"G protein subunit alpha 11","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2767","entrezgene":"2767"},{"userId":"PTGER4","geneSymbol":"PTGER4","geneName":"prostaglandin E receptor 4","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5734","entrezgene":"5734"},{"userId":"GNAI3","geneSymbol":"GNAI3","geneName":"G protein subunit alpha i3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2773","entrezgene":"2773"},{"userId":"PTGIR","geneSymbol":"PTGIR","geneName":"prostaglandin I2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5739","entrezgene":"5739"},{"userId":"ADRA1D","geneSymbol":"ADRA1D","geneName":"adrenoceptor alpha 1D","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=146","entrezgene":"146"},{"userId":"ADORA1","geneSymbol":"ADORA1","geneName":"adenosine A1 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=134","entrezgene":"134"},{"userId":"APLN","geneSymbol":"APLN","geneName":"apelin","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=8862","entrezgene":"8862"},{"userId":"MYLK","geneSymbol":"MYLK","geneName":"myosin light chain kinase","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=4638","entrezgene":"4638"},{"userId":"ADM","geneSymbol":"ADM","geneName":"adrenomedullin","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=133","entrezgene":"133"},{"userId":"PRKCE","geneSymbol":"PRKCE","geneName":"protein kinase C epsilon","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5581","entrezgene":"5581"}],"R-HSA-416482":[{"userId":"ADRA1B","geneSymbol":"ADRA1B","geneName":"adrenoceptor alpha 1B","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=147","entrezgene":"147"},{"userId":"TBXA2R","geneSymbol":"TBXA2R","geneName":"thromboxane A2 receptor","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=6915","entrezgene":"6915"},{"userId":"AKAP13","geneSymbol":"AKAP13","geneName":"A-kinase anchoring protein 13","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=11214","entrezgene":"11214"},{"userId":"ADRA1D","geneSymbol":"ADRA1D","geneName":"adrenoceptor alpha 1D","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=146","entrezgene":"146"}],"R-HSA-112043":[{"userId":"ADCY6","geneSymbol":"ADCY6","geneName":"adenylate cyclase 6","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=112","entrezgene":"112"},{"userId":"GRK2","geneSymbol":"GRK2","geneName":"G protein-coupled receptor kinase 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=156","entrezgene":"156"},{"userId":"GNAI3","geneSymbol":"GNAI3","geneName":"G protein subunit alpha i3","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=2773","entrezgene":"2773"}],"R-HSA-1489509":[{"userId":"ADCY6","geneSymbol":"ADCY6","geneName":"adenylate cyclase 6","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=112","entrezgene":"112"},{"userId":"GRK2","geneSymbol":"GRK2","geneName":"G protein-coupled receptor kinase 2","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=156","entrezgene":"156"},{"userId":"PRKCE","geneSymbol":"PRKCE","geneName":"protein kinase C epsilon","gLink":"https://www.ncbi.nlm.nih.gov/gene/?term=5581","entrezgene":"5581"}]};
+var clusters = {"ap":{"clusters":[["R-HSA-388396","R-HSA-372790","R-HSA-162582","R-HSA-416482"],["R-HSA-391903","R-HSA-391908"],["R-HSA-112043","R-HSA-1489509"]],"representatives":["R-HSA-388396","R-HSA-391903","R-HSA-112043"]},"wsc":{"representatives":["R-HSA-388396","R-HSA-162582"],"coverage":[1]}};
+
+wgLib({
+	enrichDatabase: "pathway_Reactome",
+	organism: "hsapiens",
+	hostName: "https://www.webgestalt.org/",
+	enrichment: enrichment,
+	background: background,
+	geneTables: geneTables,
+	clusters: clusters,
+	enrichMethod: "ora",
+	mappedInputSize: 33,
+	standardId: "entrezgene",
+	volcano: {
+		labelTypes: ["geneSet", "description"],
+		dimensions: { width: 960, height: 500 },
+		autoPlaceLabels: true,
+		y: "FDR",
+
+		x: "enrichmentRatio",
+		xLabel: "log2 of enrichment ratio",
+		radius: "overlap",
+		color: "overlap",
+			tooltipContent: ["geneSet", "description", "enrichmentRatio", "FDR", "pValue", "overlap"]
+	},
+	bar: {
+		dimensions: { width: 960, height: 300 },
+		labelWidth: 200,
+		tooltipContent: ["geneSet", "description", "enrichmentRatio", "FDR", "pValue", "overlap"],
+		valueKey: "enrichmentRatio",
+		xLabel: "Enrichment ratio"
+	}
+})
+
+
+</script>
+<footer class="footer has-text-centered">
+<p>WebGestalt is currently developed and maintained by Yuxing Liao, Suhas Vasaikar, Zhiao Shi and Bing Zhang at the <a target="_new" href=http://www.zhang-lab.org> Zhang Lab</a>. Other people who have made significant contribution to the project include Jing Wang, Dexter Duncan, Stefan Kirov and Jay Snoddy.</p>
+<p><b>Funding credits:</b> NIH/NCI (U24 CA210954); Leidos (15X038); CPRIT (RR160027); NIH/NIAAA (U01 AA016662, U01 AA013512); NIH/NIDA (P01 DA015027); NIH/NIMH (P50 MH078028, P50 MH096972); NIH/NCI (U24 CA159988); NIH/NIGMS (R01 GM088822).
+</p>
+</footer></body>
+</html>

@@ -1,0 +1,15 @@
+__pycache__/
+best_models/
+data/
+solubilityGO/
+training_data/
+BERT.py
+best_model_state_dict.pth
+clean_genes.csv
+disease_wp_summary.csv
+GeneLLM_bestModel.py
+GeneLLM_class.py
+GeneLLM.py
+GeneLLM.ipynb
+ipython_history.md
+DiseaseAssociation/
