@@ -1,4 +1,4 @@
-This work is on trail with deployement on LitGene[http://64.106.39.56:5000/] and deployment github
+This work is on trail with deployement on [http://64.106.39.56:5000/](LitGene) and deployment github
 Here is how to run sample code using Docker.
 1. Build docker:
       a. Go to location of docker file after git clone "cd LitGene/dependencies/docker/"
