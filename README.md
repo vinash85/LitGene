@@ -1,4 +1,6 @@
-This work is on trail with deployement on (https://www.avisahuai.com/tools)(LitGene) and deployment github
+This work is on trail webrun with deployement on (https://www.avisahuai.com/tools) Select LitGene tool 
+and Deployment github (https://github.com/vinash85/GENELLM_WEBAPP). 
+Use feedback page or contact authors to provide feedback
 Here is how to run sample code using Docker.
 1. Build docker:
       a. Go to location of docker file after git clone "cd LitGene/dependencies/docker/"
