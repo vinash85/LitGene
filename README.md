@@ -7,8 +7,6 @@ Use feedback page on the LitGene tool page or contact authors to provide feedbac
 BioArxiv link: https://www.biorxiv.org/content/10.1101/2024.08.07.606674v1
 
 
-Code Refactoring in progress and you can run sample code with instructions below:
-
 Here is how to run sample code using Docker.
 1. Build docker:
 
@@ -44,5 +42,6 @@ Here is how to run sample code using Docker.
 
  (If interested in Conda requirements provided in LitGene/dependencies tested on Ubuntu 22 with python 3.12 and nvidia driver 535.183.01 and runtime cuda 12.2 on A100 GPU)
 
+Code Refactoring in progress under code/refactored_code
 For other datafiles, models and output files . Please contact [asahu@salud.unm.edu]
 
