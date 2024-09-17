@@ -3,6 +3,9 @@ Deployment github (https://github.com/vinash85/GENELLM_WEBAPP) can be used for s
 Use feedback page on the LitGene tool page or contact authors to provide feedback.
 BioArxiv link: https://www.biorxiv.org/content/10.1101/2024.08.07.606674v1
 
+
+Code Refactoring in progress and you can run sample code with instructions below:
+
 Here is how to run sample code using Docker.
 1. Build docker:
       a. Go to location of docker file after git clone "cd LitGene/dependencies/docker/"
