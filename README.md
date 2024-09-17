@@ -39,7 +39,7 @@ Here is how to run sample code using Docker.
     i. repeat step 5
 
 
- (If interested in Conda requirements provided in LitGene/dependencies tested on>
+ (If interested in Conda requirements provided in LitGene/dependencies tested on Ubuntu 22 with python 3.12 and nvidia driver 535.183.01 and runtime cuda 12.2 on A100 GPU)
 
 For other datafiles, models and output files . Please contact [asahu@salud.unm.edu]
 
