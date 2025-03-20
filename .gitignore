@@ -1,3 +1,10 @@
-#data/
 models/
 results/
+checkpoints/
+data/gene_go_triplet.csv
+ToHub.py
+huggingface/
+__pycache__/
+examples/DiseaseAssociation/cosineSimilarity/*
+examples/DiseaseAssociation/shapValues/
+examples/SHAPAnalysis/

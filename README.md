@@ -1,49 +1,72 @@
-# LitGene CodeBase
+# LitGene
+LitGene is a representation-learning based model that enhances gene representation using textual information from scientific literature. Contrastive learning is used to enhace gene embeddings, using similar Gene Ontology (GO) terms to create positive and negative gene pairs. This repository contains the necessary codebase, model weights, and datasets to replicate our training and evaluation of the model. Our study experiments with the use of this model on a multitude of downstream biomedical tasks:
 
-This work is on trail webrun with deployement on (https://litgene.tumorai.org/). 
-
-Deployment github (https://github.com/vinash85/GENELLM_WEBAPP) can be used for self deployment of the webpage. 
-
-Use feedback page on the LitGene tool page or contact authors to provide feedback.
-
-BioArxiv link: https://www.biorxiv.org/content/10.1101/2024.08.07.606674v1
+1. Protein Soluability
+2. 
 
 
-Here is how to run sample code using Docker.
-1. Build docker:
+Links: [[arXiv](https://www.biorxiv.org/content/10.1101/2024.08.07.606674v2.abstract)] [[Interactive Webpage](http://64.106.39.56:5000/)]
 
-   a. Go to location of docker file after git clone "cd LitGene/dependencies/docker/"
+#### Outline
 
-   b. Build docker "docker build . -t litgene"
-3. Run docker image/create container:
+## Model Weights
 
-   c. "docker run --name Litgene --gpus=all --previleged --ports 8888:8888 -v litgene_location:/home/tailab/LitGene -dit litgene /bin/bash"
-5. Enter docker:
+## Usage
+Pre-reqs: Ensue that Anaconda is installed
+1. Clone this repository
+```bash
+git clone https://github.com/sposhiy33/LitGeneUpdate.git
+cd LitGeneUpdate
+```
+2. Setup conda environment
+```bash
+conda env create --name LitGene --file dependencies/conda/requirements.yml
+conda activate LitGene
+```
+### Training - Constrastive Learning for Gene Embeddings
 
-   d. "docker exec -it Litgene /bin/bash"
-6. Inside docker go to the sample code solubility:
+### Downstream Tasks
 
-   e. "cd /home/tailab/LitGene/"
+### Evaluation
 
-   f. open jupyter " jupyter notebook --ports 8888 --ip 0.0.0.0 --allow-root --no-browser"
-7. In the system where docker is deployed:
+### Interpretability Analysis 
 
-   g. open browser "https://localhost:8888"
+## Hyperparameters
+- ```--epochs``` number of epochs
+  
+- ```--lr``` learning rate, default=3e-05
+  
+- ```--pool``` pooling, default="mean"
+  
+- ```--max_length``` maximum sequence length, default=512
+  
+- ```--batch_size``` training batch size, default=50
+  
+- ```--model_name``` specify name of pre-trained models, default="microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext"
+  
+- ```--data_path``` path to dataset (CSV), default="data/combined_solubility.csv"
+  
+- ```--task_type``` task type (classification or regression), default="classification"
 
-   h. enter the token 
+- ```--test_split_size``` proportion of the dataset to include in the test split, default=0.15
 
-   i. run the sample code "solubilityEval.ipynb"
-8. or docker in remote system(optional):
+- ```--val_split_size``` proportion of the dataset to include in the validation split, defasult=0.15
 
-    g.  open command on local system
+- ```--save_model_path``` specify directory at which to save the trained model checkpoint
 
-    h. type "ssh -NL localhost:8888:localhost:8888 usernme@server"
+- ```--start_model``` path to saved model checkpoint, used to resume training
 
-    i. repeat step 5
-
-
- (If interested in Conda requirements provided in LitGene/dependencies tested on Ubuntu 22 with python 3.12 and nvidia driver 535.183.01 and runtime cuda 12.2 on A100 GPU)
-
-Code Refactoring in progress under code/refactored_code
-For other datafiles, models and output files . Please contact [asahu@salud.unm.edu]
-
+## Citation
+```bibtex
+@article {Jararweh2024.08.07.606674,
+	author = {Jararweh, Ala and Macaulay, Oladimeji and Arredondo, David and Oyebamiji, Olufunmilola M and Hu, Yue and Tafoya, Luis and Zhang, Yanfu and Virupakshappa, Kushal and Sahu, Avinash},
+	title = {LitGene: a transformer-based model that uses contrastive learning to integrate textual information into gene representations},
+	elocation-id = {2024.08.07.606674},
+	year = {2024},
+	doi = {10.1101/2024.08.07.606674},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2024/08/08/2024.08.07.606674},
+	eprint = {https://www.biorxiv.org/content/early/2024/08/08/2024.08.07.606674.full.pdf},
+	journal = {bioRxiv}
+}
+```

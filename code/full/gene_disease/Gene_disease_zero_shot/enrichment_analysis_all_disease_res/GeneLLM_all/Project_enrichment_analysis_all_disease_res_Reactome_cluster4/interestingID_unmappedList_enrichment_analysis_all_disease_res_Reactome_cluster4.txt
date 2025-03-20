@@ -1,3 +1,0 @@
-BMAL2
-BMAL1
-PHB1

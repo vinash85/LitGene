@@ -1,2 +1,0 @@
-# Coverage: 1
-R-HSA-390651
