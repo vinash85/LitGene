@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/sposhiy33/LitGeneUpdate/blob/main/LICENSE">
+  <a href="https://github.com/vinash85/LitGene/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/Code%20License-MIT-green.svg" alt="MIT License"/>
   </a>
   <a href="https://huggingface.co/datasets/tumorailab/LitGeneGOTERMS">
@@ -52,7 +52,7 @@ Users can interact with LitGene via a public interface to query gene-disease-dru
 ### Setup environment
 
 ```bash
-git clone https://github.com/sposhiy33/LitGeneUpdate.git
+git clone https://github.com/vinash85/LitGene.git
 cd LitGeneUpdate
 conda env create --name LitGene --file dependencies/conda/requirements.yml
 conda activate LitGene
