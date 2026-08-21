@@ -1,4 +1,5 @@
-<h1 align="center">🧬 LitGene</h1> <a href="https://doi.org/10.5281/zenodo.22047782"><img src="https://zenodo.org/badge/858590537.svg" alt="DOI"></a>
+<h1 align="center">🧬 LitGene</h1> 
+<a href="https://doi.org/10.5281/zenodo.22047782"><img src="https://zenodo.org/badge/858590537.svg" alt="DOI"></a>
 <h3 align="center">An Interpretable Transformer Model Integrating Text and Ontology for Gene Representation Learning</h3>
 
 <p align="center">
